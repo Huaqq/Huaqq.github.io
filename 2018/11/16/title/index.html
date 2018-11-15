@@ -3,15 +3,20 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>Lionqq&#39;s Blog</title>
+  <title>三维网格平面参数化(一) | Lionqq&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Lionqq&#39;s Blog">
-<meta property="og:url" content="http://hauqq.github.io/index.html">
+  <meta name="description" content="因为创新实践课的需要，lion最近在研究三维网格平面参数化这篇论文，在这篇文章中，先将记录下自己对Tutte的”barycentric mapping”方法的理解，相关代码等实现了再更新到这篇文章中。">
+<meta name="keywords" content="C&#x2F;C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="三维网格平面参数化(一)">
+<meta property="og:url" content="http://hauqq.github.io/2018/11/16/title/index.html">
 <meta property="og:site_name" content="Lionqq&#39;s Blog">
+<meta property="og:description" content="因为创新实践课的需要，lion最近在研究三维网格平面参数化这篇论文，在这篇文章中，先将记录下自己对Tutte的”barycentric mapping”方法的理解，相关代码等实现了再更新到这篇文章中。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-15T18:19:51.704Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lionqq&#39;s Blog">
+<meta name="twitter:title" content="三维网格平面参数化(一)">
+<meta name="twitter:description" content="因为创新实践课的需要，lion最近在研究三维网格平面参数化这篇论文，在这篇文章中，先将记录下自己对Tutte的”barycentric mapping”方法的理解，相关代码等实现了再更新到这篇文章中。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -146,9 +151,7 @@
   
 </aside>
         
-        <section id="main">
-  
-    <article id="post-title" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-title" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/11/16/title/" class="article-date">
   <time datetime="2018-11-15T18:00:49.000Z" itemprop="datePublished">2018-11-16</time>
@@ -161,8 +164,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/16/title/">三维网格平面参数化(一)</a>
+    <h1 class="article-title" itemprop="name">
+      三维网格平面参数化(一)
     </h1>
   
 
@@ -170,12 +173,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>因为创新实践课的需要，lion最近在研究<a href="https://www.sciencedirect.com/science/article/abs/pii/S0167839696000313" target="_blank" rel="noopener">三维网格平面参数化</a>这篇论文，在这篇文章中，先将记录下自己对Tutte的”barycentric mapping”方法的理解，相关代码等实现了再更新到这篇文章中。<br>
-        
-          </p><p class="article-more-link">
-            <a href="/2018/11/16/title/#more">Read More</a>
-          </p>
-        
+        <p>因为创新实践课的需要，lion最近在研究<a href="https://www.sciencedirect.com/science/article/abs/pii/S0167839696000313" target="_blank" rel="noopener">三维网格平面参数化</a>这篇论文，在这篇文章中，先将记录下自己对Tutte的”barycentric mapping”方法的理解，相关代码等实现了再更新到这篇文章中。<br><a id="more"></a></p>
+<h2 id="方法思想"><a href="#方法思想" class="headerlink" title="方法思想"></a>方法思想</h2><p>这是一种重心映射的方式，即三维网格点映射到二维平面后的位置是由其在三维网格中1-邻域的点共同决定的，可以写成如下形式：</p>
+<p>$${\mu_i}=\sum_{j=1}^N\lambda_{i,j}*\mu_j, i=1,…,n.（式1）$$<br>式中$\mu_i,\mu_j$表示映射至二维平面中的点，$\lambda_{i,j}$与点邻接有关可以表示如下：<br>$$<br>\begin{cases}<br>\lambda_{i,j}=0,(i,j)\notin E\<br>\lambda_{i,j}&gt;0,(i,j)\in E,\sum_{j=1}^N\lambda_{i,j}=1<br>\end{cases}<br>（式2）$$<br>即不相连的点之间的$\lambda$为0，相连的点之间的$\lambda$为$i$th点的1-邻域的度数的倒数。</p>
+<hr>
+<h2 id="方法步骤"><a href="#方法步骤" class="headerlink" title="方法步骤"></a>方法步骤</h2><blockquote>
+<ol>
+<li>寻找网格边界点</li>
+<li>将网格边界点映射到圆周上</li>
+<li>根据点的邻接关系计算稀疏矩阵A</li>
+<li>A是非奇异矩阵，故方程组有唯一解</li>
+</ol>
+</blockquote>
+<h3 id="1-寻找网格边界点"><a href="#1-寻找网格边界点" class="headerlink" title="1. 寻找网格边界点"></a>1. 寻找网格边界点</h3><p>在这里我们用到了<a href="http://xueshu.baidu.com/usercenter/paper/show?paperid=95c16f3635825167cdcbf888f9df127c&amp;site=xueshu_se" target="_blank" rel="noopener">一种空间三角网格边界提取方法</a>。也就是遍历网格所有的点，对每个点再遍历其邻接三角形集合，用一个数组存放这一邻接三角形中异于该点的另外两个点。存放进数组之前判断数组中是否已存在待存放点，若存在则删除数组中的这个点，若不存在则添加进数组中。最后的结果为，边界点的这一数组中存放了另外两个邻接边界点的索引，而内部点的数组是空的。</p>
+<h3 id="2-边界点映射到二维平面上"><a href="#2-边界点映射到二维平面上" class="headerlink" title="2. 边界点映射到二维平面上"></a>2. 边界点映射到二维平面上</h3><p>lion是将边界点映射到一个单位圆上的。因为三维网格的点映射到二维平面以后拓扑关系是不变的，所以各边界点距离起点边界点的位置占边界总长的比例*$2\pi$就是这个边界点在这个单位圆的弧度，再利用数学公式即可算出坐标。</p>
+<h3 id="3-构造稀疏矩阵A"><a href="#3-构造稀疏矩阵A" class="headerlink" title="3. 构造稀疏矩阵A"></a>3. 构造稀疏矩阵A</h3><p>边界点的映射之后$(式2)$可以移项成如下形式：<br>$$\mu_i-\sum_{j=1}^n\lambda_{i,j}<em>\mu_j= \sum_{j=n+1}^N\lambda_{i,j}</em>\mu_j(式3)$$<br>其中1至n为内部点，n+1到N为边界点，故式子最终将已知的归在一边，未知的归在一边。(式3)的$\mu$可以分解为$x，y$两个坐标分量，化简为如下两个方程：<br>$$Ax=b_1,Ay=b_2(式4)$$<br>其中$A$为$n*n$的矩阵($n$为内部点的个数)，$A$的各元素可以表示为如下形式：<br>$$\begin{cases}<br>a_{i,j}=1,i= j\<br>a_{i,j}=-\lambda_{i,j},i\neq j<br>\end{cases}<br>(式5)$$</p>
+<h3 id="4-求解方程"><a href="#4-求解方程" class="headerlink" title="4. 求解方程"></a>4. 求解方程</h3><p>求解(式4)时，$b_1,b_2$为各点邻接的边界点相应$x,y$坐标的和，$x,y$矩阵为各内部点相应分量构成的列向量。</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>(式3)到(式4)的变换可以自己举例帮助理解。代码后面再更新。</p>
+
       
     </div>
     <footer class="article-footer">
@@ -187,94 +203,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-三维网格平面参数化(一)" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/11/16/三维网格平面参数化(一)/" class="article-date">
-  <time datetime="2018-11-15T17:51:00.000Z" itemprop="datePublished">2018-11-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/blog/">blog</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/16/三维网格平面参数化(一)/">三维网格平面参数化(一)</a>
-    </h1>
+    <a href="/2018/11/16/三维网格平面参数化(一)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">三维网格平面参数化(一)</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>因为创新实践课的需要，lion最近在研究<a href="https://www.sciencedirect.com/science/article/abs/pii/S0167839696000313" target="_blank" rel="noopener">三维网格平面参数化</a>这篇论文，在这篇文章中，先将记录下自己对Tutte的”barycentric mapping”方法的理解，相关代码等实现了再更新到这篇文章中。<br>
-        
-          </p><p class="article-more-link">
-            <a href="/2018/11/16/三维网格平面参数化(一)/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hauqq.github.io/2018/11/16/三维网格平面参数化(一)/" data-id="cjoiwj29e0002vovkx71rnxpa" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-C/">C/C++</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/11/15/hello-world/" class="article-date">
-  <time datetime="2018-11-15T03:32:15.948Z" itemprop="datePublished">2018-11-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/15/hello-world/">我就看看</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>终于搭建好了</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hauqq.github.io/2018/11/15/hello-world/" data-id="cjoiwj28z0000vovkl556drrx" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 </section>
       </div>
