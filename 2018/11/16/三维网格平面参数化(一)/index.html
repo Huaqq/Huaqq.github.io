@@ -3,19 +3,19 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>Lionqq&#39;s Blog</title>
+  <title>三维网格平面参数化(一) | Lionqq&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="三维网格平面参数化(一)标签（空格分隔）： C/C++  因为创新实践课的需要，lion最近在研究三维网格平面参数化这篇论文，在这篇文章中，先将记录下自己对Tutte的”barycentric mapping”方法的理解，相关代码等实现了再更新到这篇文章中。 ##方法思想这是一种重心映射的方式，即三维网格点映射到二维平面后的位置是由其在三维网格中1-邻域的点共同决定的，可以写成如下形式： $${\">
+  <meta name="description" content="标签（空格分隔）： C/C++  因为创新实践课的需要，lion最近在研究三维网格平面参数化这篇论文，在这篇文章中，先将记录下自己对Tutte的”barycentric mapping”方法的理解，相关代码等实现了再更新到这篇文章中。 ##方法思想这是一种重心映射的方式，即三维网格点映射到二维平面后的位置是由其在三维网格中1-邻域的点共同决定的，可以写成如下形式： $${\mu_i}=\sum_{">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Lionqq&#39;s Blog">
+<meta property="og:title" content="三维网格平面参数化(一)">
 <meta property="og:url" content="http://yoursite.com/2018/11/16/三维网格平面参数化(一)/index.html">
 <meta property="og:site_name" content="Lionqq&#39;s Blog">
-<meta property="og:description" content="三维网格平面参数化(一)标签（空格分隔）： C/C++  因为创新实践课的需要，lion最近在研究三维网格平面参数化这篇论文，在这篇文章中，先将记录下自己对Tutte的”barycentric mapping”方法的理解，相关代码等实现了再更新到这篇文章中。 ##方法思想这是一种重心映射的方式，即三维网格点映射到二维平面后的位置是由其在三维网格中1-邻域的点共同决定的，可以写成如下形式： $${\">
+<meta property="og:description" content="标签（空格分隔）： C/C++  因为创新实践课的需要，lion最近在研究三维网格平面参数化这篇论文，在这篇文章中，先将记录下自己对Tutte的”barycentric mapping”方法的理解，相关代码等实现了再更新到这篇文章中。 ##方法思想这是一种重心映射的方式，即三维网格点映射到二维平面后的位置是由其在三维网格中1-邻域的点共同决定的，可以写成如下形式： $${\mu_i}=\sum_{">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-15T17:37:16.490Z">
+<meta property="og:updated_time" content="2018-11-15T17:43:07.969Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lionqq&#39;s Blog">
-<meta name="twitter:description" content="三维网格平面参数化(一)标签（空格分隔）： C/C++  因为创新实践课的需要，lion最近在研究三维网格平面参数化这篇论文，在这篇文章中，先将记录下自己对Tutte的”barycentric mapping”方法的理解，相关代码等实现了再更新到这篇文章中。 ##方法思想这是一种重心映射的方式，即三维网格点映射到二维平面后的位置是由其在三维网格中1-邻域的点共同决定的，可以写成如下形式： $${\">
+<meta name="twitter:title" content="三维网格平面参数化(一)">
+<meta name="twitter:description" content="标签（空格分隔）： C/C++  因为创新实践课的需要，lion最近在研究三维网格平面参数化这篇论文，在这篇文章中，先将记录下自己对Tutte的”barycentric mapping”方法的理解，相关代码等实现了再更新到这篇文章中。 ##方法思想这是一种重心映射的方式，即三维网格点映射到二维平面后的位置是由其在三维网格中1-邻域的点共同决定的，可以写成如下形式： $${\mu_i}=\sum_{">
   
   
     <link rel="icon" href="/favicon.png">
@@ -92,7 +92,7 @@
       <ul>
         
           <li>
-            <a href="/2018/11/16/三维网格平面参数化(一)/">(no title)</a>
+            <a href="/2018/11/16/三维网格平面参数化(一)/">三维网格平面参数化(一)</a>
           </li>
         
           <li>
@@ -135,9 +135,19 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      三维网格平面参数化(一)
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="三维网格平面参数化-一"><a href="#三维网格平面参数化-一" class="headerlink" title="三维网格平面参数化(一)"></a>三维网格平面参数化(一)</h1><p>标签（空格分隔）： C/C++</p>
+        <p>标签（空格分隔）： C/C++</p>
 <hr>
 <p>因为创新实践课的需要，lion最近在研究<a href="https://www.sciencedirect.com/science/article/abs/pii/S0167839696000313" target="_blank" rel="noopener">三维网格平面参数化</a>这篇论文，在这篇文章中，先将记录下自己对Tutte的”barycentric mapping”方法的理解，相关代码等实现了再更新到这篇文章中。</p>
 <p>##方法思想<br>这是一种重心映射的方式，即三维网格点映射到二维平面后的位置是由其在三维网格中1-邻域的点共同决定的，可以写成如下形式：</p>
@@ -162,7 +172,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/16/三维网格平面参数化(一)/" data-id="cjoivr0gz0000c0vkc18ldw7k" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/16/三维网格平面参数化(一)/" data-id="cjoivuxl80001ugvkp23aqdpj" class="article-share-link">Share</a>
       
       
     </footer>
