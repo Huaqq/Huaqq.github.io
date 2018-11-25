@@ -15,19 +15,19 @@
 
 
 
-<meta name="description" content="因为创新实践课的需要，lion最近在研究三维网格平面参数化这篇论文，在这篇文章中，先将记录下自己对Tutte的&amp;quot;barycentric mapping&amp;quot;方法的理解，相关代码等实现了再更新到这篇文章中。 &amp;lt;-- more --&amp;gt;  方法思想 这是一种重心映射的方式，即三维网格点映射到二维平面后的位置是由其在三维网格中1-邻域的点共同决定的，可以写成如下形式：  (式1">
+<meta name="description" content="因为创新实践课的需要，lion最近在研究三维网格平面参数化这篇论文，在这篇文章中，先将记录下自己对Tutte的&amp;quot;barycentric mapping&amp;quot;方法的理解，相关代码等实现了再更新到这篇文章中。">
 <meta name="keywords" content="C&#x2F;C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="三维网格平面参数化(一)">
 <meta property="og:url" content="http://hauqq.github.io/2018/11/16/三维网格平面参数化(一)/index.html">
 <meta property="og:site_name" content="Lionqq&#39;s Blog">
-<meta property="og:description" content="因为创新实践课的需要，lion最近在研究三维网格平面参数化这篇论文，在这篇文章中，先将记录下自己对Tutte的&amp;quot;barycentric mapping&amp;quot;方法的理解，相关代码等实现了再更新到这篇文章中。 &amp;lt;-- more --&amp;gt;  方法思想 这是一种重心映射的方式，即三维网格点映射到二维平面后的位置是由其在三维网格中1-邻域的点共同决定的，可以写成如下形式：  (式1">
+<meta property="og:description" content="因为创新实践课的需要，lion最近在研究三维网格平面参数化这篇论文，在这篇文章中，先将记录下自己对Tutte的&amp;quot;barycentric mapping&amp;quot;方法的理解，相关代码等实现了再更新到这篇文章中。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://latex.codecogs.com/gif.latex?$${\mu_i}=\sum_{j=1}^N\lambda_{i,j}*\mu_j,&space;i=1,...,n$$">
-<meta property="og:updated_time" content="2018-11-25T05:22:52.934Z">
+<meta property="og:updated_time" content="2018-11-25T05:34:14.236Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="三维网格平面参数化(一)">
-<meta name="twitter:description" content="因为创新实践课的需要，lion最近在研究三维网格平面参数化这篇论文，在这篇文章中，先将记录下自己对Tutte的&amp;quot;barycentric mapping&amp;quot;方法的理解，相关代码等实现了再更新到这篇文章中。 &amp;lt;-- more --&amp;gt;  方法思想 这是一种重心映射的方式，即三维网格点映射到二维平面后的位置是由其在三维网格中1-邻域的点共同决定的，可以写成如下形式：  (式1">
+<meta name="twitter:description" content="因为创新实践课的需要，lion最近在研究三维网格平面参数化这篇论文，在这篇文章中，先将记录下自己对Tutte的&amp;quot;barycentric mapping&amp;quot;方法的理解，相关代码等实现了再更新到这篇文章中。">
 <meta name="twitter:image" content="https://latex.codecogs.com/gif.latex?$${\mu_i}=\sum_{j=1}^N\lambda_{i,j}*\mu_j,&space;i=1,...,n$$">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -291,14 +291,12 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>因为创新实践课的需要，lion最近在研究<a href="https://www.sciencedirect.com/science/article/abs/pii/S0167839696000313" target="_blank" rel="noopener">三维网格平面参数化</a>这篇论文，在这篇文章中，先将记录下自己对Tutte的&quot;barycentric mapping&quot;方法的理解，相关代码等实现了再更新到这篇文章中。<br>
-&lt;-- more --&gt;</p>
+        <p>因为创新实践课的需要，lion最近在研究<a href="https://www.sciencedirect.com/science/article/abs/pii/S0167839696000313" target="_blank" rel="noopener">三维网格平面参数化</a>这篇论文，在这篇文章中，先将记录下自己对Tutte的&quot;barycentric mapping&quot;方法的理解，相关代码等实现了再更新到这篇文章中。</p>
+<a id="more"></a>
 <h2 id="方法思想"><a class="markdownIt-Anchor" href="#方法思想"></a> 方法思想</h2>
 <p>这是一种重心映射的方式，即三维网格点映射到二维平面后的位置是由其在三维网格中1-邻域的点共同决定的，可以写成如下形式：</p>
 <p><a href="https://www.codecogs.com/eqnedit.php?latex=$${\mu_i}=\sum_{j=1}^N\lambda_{i,j}*\mu_j,&space;i=1,...,n$$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$${\mu_i}=\sum_{j=1}^N\lambda_{i,j}*\mu_j,&space;i=1,...,n$$" title="$${\mu_i}=\sum_{j=1}^N\lambda_{i,j}*\mu_j, i=1,...,n$$"></a> (式1)</p>
-<p>式中 <a href="https://www.codecogs.com/eqnedit.php?latex=$\mu_i,\mu_j$" target="_blank">&lt;img src=&quot;https://latex.codecogs.com/gif.latex?<span class="katex-error" title="ParseError: KaTeX parse error: Unexpected character: &#039;&#039; at position 12: \mu_i,\mu_j̲quot; title=&quot;">\mu_i,\mu_jquot; title=&quot;</span>\mu_i,\mu_jquot; /&gt;</a><br>
-表示映射至二维平面中的点，<a href="https://www.codecogs.com/eqnedit.php?latex=$\lambda_{i,j}$" target="_blank">&lt;img src=&quot;https://latex.codecogs.com/gif.latex?<span class="katex-error" title="ParseError: KaTeX parse error: Unexpected character: &#039;&#039; at position 14: \lambda_{i,j}̲quot; title=&quot;">\lambda_{i,j}quot; title=&quot;</span>\lambda_{i,j}quot; /&gt;</a><br>
-与点邻接有关可以表示如下：<br>
+<p>式中 <a href="https://www.codecogs.com/eqnedit.php?latex=$\mu_i,\mu_j$" target="_blank">&lt;img src=&quot;https://latex.codecogs.com/gif.latex?<span class="katex-error" title="ParseError: KaTeX parse error: Unexpected character: &#039;&#039; at position 12: \mu_i,\mu_j̲quot; title=&quot;">\mu_i,\mu_jquot; title=&quot;</span>\mu_i,\mu_jquot; /&gt;</a>表示映射至二维平面中的点，<a href="https://www.codecogs.com/eqnedit.php?latex=$\lambda_{i,j}$" target="_blank">&lt;img src=&quot;https://latex.codecogs.com/gif.latex?<span class="katex-error" title="ParseError: KaTeX parse error: Unexpected character: &#039;&#039; at position 14: \lambda_{i,j}̲quot; title=&quot;">\lambda_{i,j}quot; title=&quot;</span>\lambda_{i,j}quot; /&gt;</a>与点邻接有关可以表示如下：<br>
 <a href="https://www.codecogs.com/eqnedit.php?latex=$$&space;\begin{cases}&space;\lambda_{i,j}=0,(i,j)\notin&space;E\\&space;\lambda_{i,j}>0,(i,j)\in&space;E,\sum_{j=1}^N\lambda_{i,j}=1&space;\end{case}&space;$$" target="_blank">&lt;img src=“https://latex.codecogs.com/gif.latex?amp;space;\begin{cases}&amp;space;\lambda_{i,j}=0,(i,j)\notin&amp;space;E\&amp;space;\lambda_{i,j}&gt;0,(i,j)\in&amp;space;E,\sum_{j=1}^N\lambda_{i,j}=1&amp;space;\end{case}&amp;space;quot; title=”$ \begin{cases} \lambda_{i,j}=0,(i,j)\notin E\ \lambda_{i,j}&gt;0,(i,j)\in E,\sum_{j=1}^N\lambda_{i,j}=1 \end{case} quot; /&gt;</a> (式2)<br>
 即不相连的点之间的<a href="https://www.codecogs.com/eqnedit.php?latex=$\lambda$" target="_blank">&lt;img src=&quot;https://latex.codecogs.com/gif.latex?<span class="katex-error" title="ParseError: KaTeX parse error: Unexpected character: &#039;&#039; at position 8: \lambda̲quot; title=&quot;">\lambdaquot; title=&quot;</span>\lambdaquot; /&gt;</a>为0，相连的点之间的<a href="https://www.codecogs.com/eqnedit.php?latex=$\lambda$" target="_blank">&lt;img src=&quot;https://latex.codecogs.com/gif.latex?<span class="katex-error" title="ParseError: KaTeX parse error: Unexpected character: &#039;&#039; at position 8: \lambda̲quot; title=&quot;">\lambdaquot; title=&quot;</span>\lambdaquot; /&gt;</a>为<a href="https://www.codecogs.com/eqnedit.php?latex=$i$" target="_blank">&lt;img src=&quot;https://latex.codecogs.com/gif.latex?<span class="katex-error" title="ParseError: KaTeX parse error: Unexpected character: &#039;&#039; at position 2: i̲quot; title=&quot;">iquot; title=&quot;</span>iquot; /&gt;</a>th点的1-邻域的度数的倒数。</p>
 <hr>
@@ -314,7 +312,7 @@
 <h3 id="1-寻找网格边界点"><a class="markdownIt-Anchor" href="#1-寻找网格边界点"></a> 1. 寻找网格边界点</h3>
 <p>在这里我们用到了<a href="http://xueshu.baidu.com/usercenter/paper/show?paperid=95c16f3635825167cdcbf888f9df127c&amp;site=xueshu_se" target="_blank" rel="noopener">一种空间三角网格边界提取方法</a>。也就是遍历网格所有的点，对每个点再遍历其邻接三角形集合，用一个数组存放这一邻接三角形中异于该点的另外两个点。存放进数组之前判断数组中是否已存在待存放点，若存在则删除数组中的这个点，若不存在则添加进数组中。最后的结果为，边界点的这一数组中存放了另外两个邻接边界点的索引，而内部点的数组是空的。</p>
 <h3 id="2-边界点映射到二维平面上"><a class="markdownIt-Anchor" href="#2-边界点映射到二维平面上"></a> 2. 边界点映射到二维平面上</h3>
-<p>lion是将边界点映射到一个单位圆上的。因为三维网格的点映射到二维平面以后拓扑关系是不变的，所以各边界点距离起点边界点的位置占边界总长的比例*<a href="https://www.codecogs.com/eqnedit.php?latex=$2\pi$" target="_blank">&lt;img src=“https://latex.codecogs.com/gif.latex?$2\piquot; title=”$2\piquot; /&gt;</a> 就是这个边界点在这个单位圆的弧度，再利用数学公式即可算出坐标。</p>
+<p>lion是将边界点映射到一个单位圆上的。因为三维网格的点映射到二维平面以后拓扑关系是不变的，所以各边界点距离起点边界点的位置占边界总长的比例* <a href="https://www.codecogs.com/eqnedit.php?latex=$2\pi$" target="_blank">&lt;img src=“https://latex.codecogs.com/gif.latex?$2\piquot; title=”$2\piquot; /&gt;</a> 就是这个边界点在这个单位圆的弧度，再利用数学公式即可算出坐标。</p>
 <h3 id="3-构造稀疏矩阵a"><a class="markdownIt-Anchor" href="#3-构造稀疏矩阵a"></a> 3.  构造稀疏矩阵A</h3>
 <p>边界点的映射之后<span class="katex-error" title="ParseError: KaTeX parse error: Expected &#039;EOF&#039;, got &#039;式&#039; at position 2: (式̲2)">(式2)</span>可以移项成如下形式：<br>
 <a href="https://www.codecogs.com/eqnedit.php?latex=$$\mu_i-\sum_{j=1}^n\lambda_{i,j}*\mu_j=&space;\sum_{j=n&plus;1}^N\lambda_{i,j}*\mu_j$$" target="_blank">&lt;img src=&quot;https://latex.codecogs.com/gif.latex?<span class="katex-error" title="ParseError: KaTeX parse error: Expected &#039;EOF&#039;, got &#039;&amp;&#039; at position 39: …da_{i,j}*\mu_j=&amp;̲space;\sum_{j=n…">\mu_i-\sum_{j=1}^n\lambda_{i,j}*\mu_j=&amp;space;\sum_{j=n&amp;plus;1}^N\lambda_{i,j}*\mu_jquot; title=&quot;</span>\mu_i-\sum_{j=1}^n\lambda_{i,j}<em>\mu_j= \sum_{j=n+1}^N\lambda_{i,j}</em>\mu_jquot; /&gt;</a> (式3)<br>
@@ -338,7 +336,7 @@
         <p><span>本文标题:</span><a href="/2018/11/16/三维网格平面参数化(一)/">三维网格平面参数化(一)</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">qq</a></p>
         <p><span>发布时间:</span>2018-11-16, 02:00:49</p>
-        <p><span>最后更新:</span>2018-11-25, 13:22:52</p>
+        <p><span>最后更新:</span>2018-11-25, 13:34:14</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/11/16/三维网格平面参数化(一)/" title="三维网格平面参数化(一)">http://hauqq.github.io/2018/11/16/三维网格平面参数化(一)/</a>
             <span class="copy-path" data-clipboard-text="原文: http://hauqq.github.io/2018/11/16/三维网格平面参数化(一)/　　作者: qq" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
