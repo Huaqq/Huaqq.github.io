@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="Lionqq&#39;s Blog">
 <meta property="og:description" content="1. 数组的使用 定义数组变量 &amp;lt;类型&amp;gt;[] &amp;lt;名字&amp;gt;=new &amp;lt;类型&amp;gt;[元素个数] int[] nums=new int[100]; 数组存在安全隐患。 数组中的元素必须都为同类型；大小一旦确定就不能改变；元素的个数可以是变量。故安全隐患为数组越界的存在。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-02T11:54:10.580Z">
+<meta property="og:updated_time" content="2019-04-03T10:07:53.611Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java复习">
 <meta name="twitter:description" content="1. 数组的使用 定义数组变量 &amp;lt;类型&amp;gt;[] &amp;lt;名字&amp;gt;=new &amp;lt;类型&amp;gt;[元素个数] int[] nums=new int[100]; 数组存在安全隐患。 数组中的元素必须都为同类型；大小一旦确定就不能改变；元素的个数可以是变量。故安全隐患为数组越界的存在。">
@@ -197,7 +197,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/">C/C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-Three-js/">JavaScript Three.js</a></li></ul>
                     </div>
                 </section>
                 
@@ -384,6 +384,37 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Girl</span> <span class="keyword">extends</span> <span class="title">Ren</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String words;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Girl</span><span class="params">(<span class="keyword">int</span> age, String name,String words)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(age,name);</span><br><span class="line">		<span class="keyword">this</span>.words = words;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.print(<span class="string">"Girl:"</span>);</span><br><span class="line">		<span class="keyword">super</span>.print();</span><br><span class="line">		System.out.println(words);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Db.java</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//实现一个存储人的信息的类</span></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Db</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> ArrayList&lt;Ren&gt; r=<span class="keyword">new</span> ArrayList&lt;Ren&gt;();</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(Ren ren)</span> </span>&#123;</span><br><span class="line">		r.add(ren);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">list</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(Ren a:r) &#123;</span><br><span class="line">			a.print();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Db d=<span class="keyword">new</span> Db();</span><br><span class="line">		d.add(<span class="keyword">new</span> Boy(<span class="number">10</span>,<span class="string">"qq"</span>,<span class="number">25</span>));</span><br><span class="line">		d.add(<span class="keyword">new</span> Girl(<span class="number">16</span>,<span class="string">"ww"</span>,<span class="string">"rwqrqer"</span>));</span><br><span class="line">		d.add(<span class="keyword">new</span> Ren());</span><br><span class="line">		d.list();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5多态变量"><a class="markdownIt-Anchor" href="#5多态变量"></a> 5.多态变量</h3>
+<p>这个变量在运行的时候，在具体某一时刻，它所管理的对象的类型是会变化的</p>
+<blockquote>
+<p>子类的对象可以被当作父类的对象来使用</p>
+<ul>
+<li>赋值给父类的变量</li>
+<li>传递给需要父类对象的函数</li>
+<li>放进存放父类对象的容器里</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Animal a1=<span class="keyword">new</span> Animal();</span><br><span class="line">Animal a2=<span class="keyword">new</span> Dog();</span><br><span class="line">Animal a3=<span class="keyword">new</span> Cat();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Java对象变量是多态的，它们能保存不止一种类型的对象</li>
+<li>可以保存声明类型的对象，或声明类型的子类的对象</li>
+<li>把子类对象赋给父类的变量时，就发生了向上造型</li>
+</ul>
+<h5 id="造型cast"><a class="markdownIt-Anchor" href="#造型cast"></a> 造型<code>Cast</code></h5>
+<p>父类的对象<strong>不能</strong>赋值给子类的变量（让子类变量去管理父类对象）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Animal a;</span><br><span class="line">Dog d=<span class="keyword">new</span> Dog();</span><br><span class="line">a=d;<span class="comment">//ok</span></span><br><span class="line">d=a;<span class="comment">//error</span></span><br><span class="line">d=(Dog) a;<span class="comment">//ok,只有当a这个父类变量实际管理的是Car才行</span></span><br></pre></td></tr></table></figure>
+<p>不同于强制类型转换（char-&gt;int-&gt;double），对象本身并没有发生变化</p>
+<p>向上造型是安全的，把子类对象当作父类对象来用</p>
+<h5 id="函数调用的绑定"><a class="markdownIt-Anchor" href="#函数调用的绑定"></a> 函数调用的绑定</h5>
+<p>当通过对象变量调用函数的时候，调用哪个函数称为绑定</p>
+<p>静态绑定：根据变量的声明类型决定</p>
+<p>动态绑定：根据变量的动态类型决定</p>
+<p>在成员函数中调用其他成员函数也是通过<code>this</code>这个对象变量来调用的</p>
+<p><code>Override</code>覆盖关系，子类和父类中存在名称和参数完全相同的函数</p>
+<p>如Db.java中的<code>a.print()</code>会根据a所管理的对象所属的类去调用这一函数</p>
+<h3 id="6object类"><a class="markdownIt-Anchor" href="#6object类"></a> 6.Object类</h3>
+<p>所有的类都继承自此类，典型的函数有<code>toString(),equals()</code></p>
+<p><code>@Override</code>告诉编译器下面这个函数覆盖了基类的函数，其中修饰符、名称、参数表得完全一样，如果有一个不同就会发生错误</p>
 
       
     </div>
@@ -395,7 +426,7 @@
         <p><span>本文标题:</span><a href="/2019/04/02/Java/">Java复习</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">qq</a></p>
         <p><span>发布时间:</span>2019-04-02, 19:53:00</p>
-        <p><span>最后更新:</span>2019-04-02, 19:54:10</p>
+        <p><span>最后更新:</span>2019-04-03, 18:07:53</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/04/02/Java/" title="Java复习">http://huaqq.github.io/2019/04/02/Java/</a>
             <span class="copy-path" data-clipboard-text="原文: http://huaqq.github.io/2019/04/02/Java/　　作者: qq" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -409,6 +440,12 @@
 
 
     <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/04/04/初学three-js（一）/">
+                    初学three.js（一）
+                </a>
+            </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
@@ -425,7 +462,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-数组的使用"><span class="toc-number">1.</span> <span class="toc-text"> 1. 数组的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2类"><span class="toc-number">2.</span> <span class="toc-text"> 2.类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3容器的使用"><span class="toc-number">3.</span> <span class="toc-text"> 3.容器的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#hash表"><span class="toc-number">3.0.1.</span> <span class="toc-text"> Hash表</span></a></li></ol></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#4继承"><span class="toc-number">4.</span> <span class="toc-text"> 4.继承</span></a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-数组的使用"><span class="toc-number">1.</span> <span class="toc-text"> 1. 数组的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2类"><span class="toc-number">2.</span> <span class="toc-text"> 2.类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3容器的使用"><span class="toc-number">3.</span> <span class="toc-text"> 3.容器的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#hash表"><span class="toc-number">3.0.1.</span> <span class="toc-text"> Hash表</span></a></li></ol></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#4继承"><span class="toc-number">4.</span> <span class="toc-text"> 4.继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5多态变量"><span class="toc-number">5.</span> <span class="toc-text"> 5.多态变量</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#造型cast"><span class="toc-number">5.0.1.</span> <span class="toc-text"> 造型Cast</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#函数调用的绑定"><span class="toc-number">5.0.2.</span> <span class="toc-text"> 函数调用的绑定</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6object类"><span class="toc-number">6.</span> <span class="toc-text"> 6.Object类</span></a></li>
         
     </div>
     <style>
@@ -481,7 +518,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2019/04/04/初学three-js（一）/" title="上一篇: 初学three.js（一）">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -493,7 +532,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/04/02/Java/">Java复习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/三维网格平面参数化(一)/">三维网格平面参数化(一)</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/04/04/初学three-js（一）/">初学three.js（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/02/Java/">Java复习</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/三维网格平面参数化(一)/">三维网格平面参数化(一)</a></li></ul>
 
 
 
