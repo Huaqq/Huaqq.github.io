@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="Lionqq&#39;s Blog">
 <meta property="og:description" content="1. 数组的使用 定义数组变量 &amp;lt;类型&amp;gt;[] &amp;lt;名字&amp;gt;=new &amp;lt;类型&amp;gt;[元素个数] int[] nums=new int[100]; 数组存在安全隐患。 数组中的元素必须都为同类型；大小一旦确定就不能改变；元素的个数可以是变量。故安全隐患为数组越界的存在。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-03T10:07:53.611Z">
+<meta property="og:updated_time" content="2019-04-06T07:03:40.522Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java复习">
 <meta name="twitter:description" content="1. 数组的使用 定义数组变量 &amp;lt;类型&amp;gt;[] &amp;lt;名字&amp;gt;=new &amp;lt;类型&amp;gt;[元素个数] int[] nums=new int[100]; 数组存在安全隐患。 数组中的元素必须都为同类型；大小一旦确定就不能改变；元素的个数可以是变量。故安全隐患为数组越界的存在。">
@@ -415,6 +415,18 @@
 <h3 id="6object类"><a class="markdownIt-Anchor" href="#6object类"></a> 6.Object类</h3>
 <p>所有的类都继承自此类，典型的函数有<code>toString(),equals()</code></p>
 <p><code>@Override</code>告诉编译器下面这个函数覆盖了基类的函数，其中修饰符、名称、参数表得完全一样，如果有一个不同就会发生错误</p>
+<h3 id="7消除代码复制实现封装与可扩展性"><a class="markdownIt-Anchor" href="#7消除代码复制实现封装与可扩展性"></a> 7.消除代码复制，实现封装与可扩展性</h3>
+<p>好的代码！=没有错误的代码，类与类之间要耦合性要低，直接体现在这个类不能直接使用另一个类的成员变量</p>
+<blockquote>
+<p>函数里返回字符串可以<code>String ret=&quot;&quot;; return ret+String</code>，<code>String</code>每一次连接都会产生新的<code>String</code>对象，开销大，不适应<code>String</code>修改多的场景。<code>String</code>操作多的场景一般用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; StringBuffer sb=<span class="keyword">new</span> StringBuffer();</span><br><span class="line">&gt; sb.append(<span class="string">""</span>);</span><br><span class="line">&gt; <span class="keyword">return</span> sb.toString;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>这种形式</p>
+</blockquote>
+<p><code>硬编码</code> 把数据直接写在代码里。一般而言数据和代码最好是分离的，易于维护。可以用容器来实现——<code>Hash</code>表。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>用框架+数据来代替硬编码。定义一个Handler来处理命令，用Hash表来保存命令和Handler之间的关系</p>
 
       
     </div>
@@ -426,7 +438,7 @@
         <p><span>本文标题:</span><a href="/2019/04/02/Java/">Java复习</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">qq</a></p>
         <p><span>发布时间:</span>2019-04-02, 19:53:00</p>
-        <p><span>最后更新:</span>2019-04-03, 18:07:53</p>
+        <p><span>最后更新:</span>2019-04-06, 15:03:40</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/04/02/Java/" title="Java复习">http://huaqq.github.io/2019/04/02/Java/</a>
             <span class="copy-path" data-clipboard-text="原文: http://huaqq.github.io/2019/04/02/Java/　　作者: qq" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -462,7 +474,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-数组的使用"><span class="toc-number">1.</span> <span class="toc-text"> 1. 数组的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2类"><span class="toc-number">2.</span> <span class="toc-text"> 2.类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3容器的使用"><span class="toc-number">3.</span> <span class="toc-text"> 3.容器的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#hash表"><span class="toc-number">3.0.1.</span> <span class="toc-text"> Hash表</span></a></li></ol></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#4继承"><span class="toc-number">4.</span> <span class="toc-text"> 4.继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5多态变量"><span class="toc-number">5.</span> <span class="toc-text"> 5.多态变量</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#造型cast"><span class="toc-number">5.0.1.</span> <span class="toc-text"> 造型Cast</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#函数调用的绑定"><span class="toc-number">5.0.2.</span> <span class="toc-text"> 函数调用的绑定</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6object类"><span class="toc-number">6.</span> <span class="toc-text"> 6.Object类</span></a></li>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-数组的使用"><span class="toc-number">1.</span> <span class="toc-text"> 1. 数组的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2类"><span class="toc-number">2.</span> <span class="toc-text"> 2.类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3容器的使用"><span class="toc-number">3.</span> <span class="toc-text"> 3.容器的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#hash表"><span class="toc-number">3.0.1.</span> <span class="toc-text"> Hash表</span></a></li></ol></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#4继承"><span class="toc-number">4.</span> <span class="toc-text"> 4.继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5多态变量"><span class="toc-number">5.</span> <span class="toc-text"> 5.多态变量</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#造型cast"><span class="toc-number">5.0.1.</span> <span class="toc-text"> 造型Cast</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#函数调用的绑定"><span class="toc-number">5.0.2.</span> <span class="toc-text"> 函数调用的绑定</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6object类"><span class="toc-number">6.</span> <span class="toc-text"> 6.Object类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7消除代码复制实现封装与可扩展性"><span class="toc-number">7.</span> <span class="toc-text"> 7.消除代码复制，实现封装与可扩展性</span></a></li>
         
     </div>
     <style>
